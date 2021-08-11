@@ -2,26 +2,39 @@
   "name": "admin",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "merge-schema": "npx prisma-merge -b prisma/base.prisma -o prisma/schema.prisma -s ./models/**/*.schema.prisma",
-    "db": "npm run merge-schema &&  npx prisma format",
     "db:push": "npx prisma db push",
     "db:push-f": "npx prisma db push --accept-data-loss",
-    "dev": "npm run nodemon src"
+    "merge-schema": "npx prisma-merge -b prisma/base.prisma -o prisma/schema.prisma -s ./models/**/*.schema.prisma",
+    "db": "npm run merge-schema &&  npx prisma format",
+    "mig:save":"npx prisma migrate save",
+    "mig:create":"npx prisma migrate save",
+    "mig:up":"npx prisma migrate up",
+    "mig:down":"npx prisma migrate down",
+    "twatch": "tsc -w",
+    "dev": "nodemon",
+    "prestart": "npm run db",
+    "start": " npm run dev",
+    "start:prod": "npm run build && node build/index.js",
+    "build": "rimraf ./build && tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^2.28.0"
+    "@prisma/client": "^2.28.0",
+    "cores": "^0.8.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
-    "@types/node": "^16.4.13",
+    "@types/node": "^16.4.14",
     "nodemon": "^2.0.12",
     "prisma-merge": "^0.2.0",
+    "ts-node": "^10.2.0",
     "typescript": "^4.3.5"
   }
 }
