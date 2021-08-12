@@ -4,6 +4,4 @@ model User {
     lastName String
     email String @unique
     isAdmin Boolean @default(false)
-
-    @@unique(email)
 }
