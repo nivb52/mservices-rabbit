@@ -15,18 +15,26 @@ app.use(cors({
     origin: ['http://localhost:3000', 'http://localhost:8080']
 }));
 
-async function main(){
+async function main() {
+    const newUser = await db.user.create({
+        data: {
+            firstName: 'Alice',
+            lastName: 'Wonder',
+            email: 'alice@prisma.io',
+        },
+    })
     return await db.user.findMany()
 }
 
-app.get('/', function (req: Request, res: Response) {
-    res.send('Hello World')
-});
+// app.get('/', function (req: Request, res: Response) {
+//     res.send('Hello World')
+// });
 
 
-app.get('/u', async function (req: Request, res: Response) {
+app.get('/', async function (req: Request, res: Response) {
     const users = await main();
-    res.send(users)
+    console.log(JSON.stringify(users));
+    res.send(JSON.stringify(users))
 });
 
 app.listen(PORT, () => {
