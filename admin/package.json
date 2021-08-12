@@ -13,10 +13,8 @@
     "mig:create": "npx prisma migrate save",
     "mig:up": "npx prisma migrate up",
     "mig:down": "npx prisma migrate down",
-    "twatch": "tsc -w",
-    "tsc": "tsc",
+    "ts": "tsc",
     "dev": "nodemon",
-    "prestart": "echo npm run tsc",
     "start": " npm run dev",
     "start:prod": "npm run build && node build/index.js",
     "build": "rimraf ./build && tsc"
