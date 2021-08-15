@@ -22,11 +22,6 @@ app.get('/users', async function (req: Request, res: Response) {
     res.send(JSON.stringify(users))
 });
 
-app.post('/users', async (req: Request, res: Response) => {
-    const new_user = await User.create(req.body);
-    return res.send(JSON.stringify(new_user))
-})
- 
 app.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${PORT}`)
 })
