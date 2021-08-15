@@ -4,8 +4,7 @@ const PORT = 4000;
 import { Request, Response, Application } from 'express';
 import express = require('express');
 import dbConnection from './db';
-// import { PrismaClient } from '@prisma/client'
-// const db = new PrismaClient();
+
 
 import * as User from '../models//user/index'
 
@@ -21,7 +20,6 @@ app.get('/users', async function (req: Request, res: Response) {
     const users = await db.user.findMany()
     res.send(JSON.stringify(users))
 });
-
 
 app.get('/users/:id', async (req: Request, res: Response) => {
     const user = await User.findById(req.params.id)
