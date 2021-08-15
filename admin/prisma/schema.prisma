@@ -11,19 +11,3 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
-
-model Order {
-  id          Int      @id @default(autoincrement())
-  price       Decimal  @db.Decimal
-  quantity    Int      @default(1)
-  create_date DateTime @default(now()) @db.Timestamptz
-  create_user Int
-}
-
-model User {
-  id        Int     @id @default(autoincrement())
-  firstName String
-  lastName  String
-  email     String  @unique
-  isAdmin   Boolean @default(false)
-}

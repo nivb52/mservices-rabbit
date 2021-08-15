@@ -3,10 +3,11 @@ const PORT = 4000;
 
 import { Request, Response, Application } from 'express';
 import express = require('express');
-// import  db from './db';
-import { PrismaClient } from '@prisma/client'
+import dbConnection from './db';
+// import { PrismaClient } from '@prisma/client'
+// const db = new PrismaClient();
 
-const db = new PrismaClient();
+import * as User from '../models//user/index'
 
 const app: Application = express();
 
@@ -15,28 +16,17 @@ app.use(cors({
     origin: ['http://localhost:3000', 'http://localhost:8080']
 }));
 
-async function main() {
-    const newUser = await db.user.create({
-        data: {
-            firstName: 'Alice',
-            lastName: 'Wonder',
-            email: 'alice@prisma.io',
-        },
-    })
-    return await db.user.findMany()
-}
-
-// app.get('/', function (req: Request, res: Response) {
-//     res.send('Hello World')
-// });
-
-
-app.get('/', async function (req: Request, res: Response) {
-    const users = await main();
-    console.log(JSON.stringify(users));
+app.get('/users', async function (req: Request, res: Response) {
+    const db = await dbConnection;
+    const users = await db.user.findMany()
     res.send(JSON.stringify(users))
 });
 
+app.post('/users', async (req: Request, res: Response) => {
+    const new_user = await User.create(req.body);
+    return res.send(JSON.stringify(new_user))
+})
+ 
 app.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${PORT}`)
 })
