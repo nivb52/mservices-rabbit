@@ -1,0 +1,7 @@
+model Order {
+  id      Int      @default(autoincrement()) @id
+  price   Decimal   @db.Decimal
+  quantity  Int @default(1)  
+  create_date DateTime @db.Timestamptz() @default(now())
+  create_user Int
+}
