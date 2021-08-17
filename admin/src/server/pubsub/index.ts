@@ -1,5 +1,5 @@
 import * as amqp from 'amqplib'
-
+globalThis.connections = [];
 interface PubSub {
     connection: amqp.Connection
     channel: amqp.Channel
@@ -17,7 +17,8 @@ class PubSub {
 
     async init<Promise>() {
         try {
-            this.connection = await amqp.connect(process.env.AMQP)
+            this.connection = await amqp.connect(process.env.AMQP);
+            globalThis.connections.push(this.connection);
         } catch (err) {
             console.warn(err)
         }

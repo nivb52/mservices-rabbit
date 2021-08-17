@@ -1,4 +1,5 @@
 require('dotenv').config();
+import * as process from 'process';
 
 import * as cors from 'cors';
 import {Application } from 'express';
@@ -21,3 +22,13 @@ app.use('/users', users)
 app.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${PORT}`)
 })
+
+
+
+process.on('beforeExit', (code) => {
+    globalThis.forEach(connection => connection.close());
+});
+
+process.on('exit', (code) => {
+    console.log('Process exit event with code: ', code);
+});
