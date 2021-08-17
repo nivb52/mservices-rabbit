@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import * as cors from 'cors';
 import {Application } from 'express';
 import users from './routes/users';
