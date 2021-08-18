@@ -1,5 +1,4 @@
 import * as amqp from 'amqplib'
-globalThis.connections = [];
 interface PubSub {
     connection: amqp.Connection
     channel: amqp.Channel
