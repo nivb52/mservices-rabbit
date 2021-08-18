@@ -7,9 +7,9 @@ import * as User from '../../models//user/index';
 import PubSub from '../pubsub/';
 
 
-const q = 'users'; //
-const publisher = new PubSub('Users', 'users', q);
-const consumer = new PubSub('Users', 'users', q);
+const q_name = 'users'; //
+const publisher = new PubSub('Users', 'users', q_name);
+const consumer = new PubSub('Users', 'users', q_name);
 // await consumer.init();
 const txt = 'something to do'
 // Publisher
