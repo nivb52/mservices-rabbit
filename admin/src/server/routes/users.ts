@@ -27,7 +27,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 router.post('', async (req: Request, res: Response) => {
     const new_user = await User.create(req.body);
     await publisher.init();
-    const msg:string = createTextMessage('create', new_user, { id: null })
+    const msg:string = createTextMessage('create', new_user, {})
     publisher.publish(msg);
     return res.send(JSON.stringify(new_user))
 });
@@ -35,7 +35,7 @@ router.post('', async (req: Request, res: Response) => {
 router.put('/:id', async (req: Request, res: Response) => {
     const updated_user = await User.updateById(<string | number> req.params.id, req.body);
     await publisher.init();
-    const msg: Blob = createBlobMessage('update', updated_user, { id: req.params.id }, {buffer:true})
+    const msg: Blob = createBlobMessage('update', updated_user, {})
     publisher.publish(await msg.text());
     return res.send(JSON.stringify(updated_user))
 });
@@ -43,7 +43,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 router.delete('/:id', async (req: Request, res: Response) => {
     const deleted_user = await User.deleteById(<string | number>req.params.id);
     await publisher.init();
-    const msg: Blob = createBlobMessage('delete', {}, { id: req.params.id, old_data: deleted_user })
+    const msg: Blob = createBlobMessage('delete', {}, { old_data: deleted_user })
     publisher.publish(await msg.text());
     return res.send(deleted_user)
 })
