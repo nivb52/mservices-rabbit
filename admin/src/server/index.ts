@@ -1,5 +1,5 @@
 require('dotenv').config();
-globalThis.connections : [] = [];
+globalThis.connections  = <[]> [];
 
 import * as process from 'process';
 
